@@ -1,152 +1,149 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=10px, initial-scale=10">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 20px solid #ffffff;
-width: max-content;
-orientation: landscape;
-margin-left: 370px;
-padding: 20px;}
+  <meta name="viewport" content="width=10px, initial-scale=10">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-flexbox;
-  border: 1px solid #ccc;
-  box-sizing: inherit;
-}
+    form {
+      width: max-content;
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=email] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-flexbox;
+      border: 1px solid #ccc;
+      box-sizing: inherit;
+
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      margin-left: 65px;
+      border: none;
+      cursor: pointer;
+      width: 50%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+
+    img.avatar {
+      width: 50%;
+      border-radius: 50%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 65px;
+    }
+
+    img.pict {
+      padding: 30px;
+      border-radius: 50%;
+      margin-top: 20px;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      padding: 30px;
+      margin: auto;
+      margin-bottom: 10px;
+      width: max-content;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    .accordion {
+  background-color: #eee;
+  color: #444;
   cursor: pointer;
-  width: 50%;
-  margin-left: 90px;
-  margin-right: 90px;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
 }
 
-button:hover {
-  opacity: 0.8;
+.active, .accordion:hover {
+  background-color: #ccc; 
 }
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
 }
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 50%;
-  border-radius: 50%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 100px;
-  margin-right: 100px;
-}
-
-.container {
-  margin-left: 70px;
-  margin-right: 70px;
-}
-
-.form-group{
-  padding: 10px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-</style>
+  </style>
 </head>
+
 <body>
 
   <div class="container">
-    <div class="card card-container">
-    <form
-      *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="avatar"
-    />
-    <h2><b>Login Form</b></h2>
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          placeholder="Username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-        />
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="f.submitted && username.invalid"
-        >
-          Username is required!
-        </div>
-      </div>
-      <div class="form-group">
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="Password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="f.submitted && password.invalid"
-        >
-          <div *ngIf="password.errors.required">Password is required</div>
-          <div *ngIf="password.errors.minlength">
-            Password must be at least 6 characters
+    <div class="accordion">
+      <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar" />
+        <h2 class="container"><b>Login Form</b></h2>
+        <div class="form-group">
+          <input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)]="form.username"
+            required #username="ngModel" />
+          <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
+            Username is required!
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Login</button>
-      </div>
-      <div class="form-group">
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="f.submitted && isLoginFailed"
-        >
-          Login failed: {{ errorMessage }}
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="form.password"
+            required minlength="6" #password="ngModel" />
+          <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">Login</button>
+        </div>
+        <div class="form-group">
+          <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+            Login failed: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
 
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
+
+      <div class="container" *ngIf="isLoggedIn">
+        <div>
+          <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="pict" />
+        </div>
+        <h2 class="container"><b>Welcome</b> {{ username }}.</h2>
+        
+      </div>
     </div>
   </div>
-</div>
 
 </body>
+
 </html>
