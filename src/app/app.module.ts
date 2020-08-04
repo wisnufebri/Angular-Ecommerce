@@ -15,6 +15,9 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { ProfileComponent } from './profile/profile.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
+import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
+import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,11 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     BoardAdminComponent,
     BoardUserComponent,
     BoardModeratorComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddTutorialComponent,
+    TutorialDetailsComponent,
+    TutorialsListComponent,
+    
   ],
   imports: [
     BrowserModule,

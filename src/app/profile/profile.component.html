@@ -76,6 +76,10 @@ span.psw {
       <strong>Email:</strong>
       {{ currentUser.email }}
     </p>
+    <p>
+      <strong>Alamat:</strong>
+      {{ currentUser.userDetail }}
+    </p>
     <strong>Roles:</strong>
     <ul>
       <li *ngFor="let role of currentUser.roles">

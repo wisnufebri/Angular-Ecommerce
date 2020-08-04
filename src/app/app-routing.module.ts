@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -8,6 +7,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
+import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
+import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +20,9 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'tutorials', component: TutorialsListComponent },
+  { path: 'tutorials/:id', component: TutorialDetailsComponent },
+  { path: 'add', component: AddTutorialComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
