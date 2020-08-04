@@ -1,63 +1,131 @@
-<div class="list row">
-  <div class="col-md-8">
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search by title"
-        [(ngModel)]="title"
-      />
-      <div class="input-group-append">
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          (click)="searchTitle()"
-        >
-          Search
-        </button>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    form {
+      border: 10px solid #ffffff;
+      width: max-content;
+      orientation: landscape;
+      margin-left: 410px;
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=email] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-flexbox;
+      border: 1px solid #ccc;
+      box-sizing: inherit;
+
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 30%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+
+    img.avatar {
+      width: 20%;
+      border-radius: 50%;
+      margin-left: 450px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      padding: 10px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron text-center">
+    <h1>Tutorial Page</h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <!-- search -->
+      <div class="col-sm-4">
+        <h4>Search by Title</h4>
+        <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="title" />
+          <button class="btn btn-primary btn-block" type="button" (click)="searchTitle()">
+            <i class="fa fa-search"></i> Search
+          </button>
+          <button routerLink="/add" class="btn btn-primary btn-block">
+            <i class="fa fa-plus-square"></i> Add
+          </button>
+        </div>
+
+      <div class="col-sm-4">
+        <h4>Please click on a list !!!</h4>
+        <strong class="list-group">
+          <li class="list-group-item" *ngFor="let tutorial of tutorials; let i = index"
+            [class.active]="i == currentIndex" (click)="setActiveTutorial(tutorial, i)">
+            {{ tutorial.title }}
+          </li>
+        </strong>
+      </div>
+
+      <div class="col-sm-4">
+        <div *ngIf="currentTutorial">
+          <h4>Tutorial</h4>
+          <div>
+            <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+          </div>
+          <div>
+            <label><strong>Description:</strong></label>
+            {{ currentTutorial.description }}
+          </div>
+          <div>
+            <label><strong>Status:</strong></label>
+            {{ currentTutorial.published ? "Published" : "Pending" }}
+          </div>
+
+          <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
+            Edit
+          </a>
+        </div>
+        <div *ngIf="!currentTutorial">
+          <br />
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <h4>Tutorials List</h4>
-    <ul class="list-group">
-      <li
-        class="list-group-item"
-        *ngFor="let tutorial of tutorials; let i = index"
-        [class.active]="i == currentIndex"
-        (click)="setActiveTutorial(tutorial, i)"
-      >
-        {{ tutorial.title }}
-      </li>
-    </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
-      Remove All
-    </button>
-  </div>
-  <div class="col-md-6">
-    <div *ngIf="currentTutorial">
-      <h4>Tutorial</h4>
-      <div>
-        <label><strong>Title:</strong></label> {{ currentTutorial.title }}
-      </div>
-      <div>
-        <label><strong>Description:</strong></label>
-        {{ currentTutorial.description }}
-      </div>
-      <div>
-        <label><strong>Status:</strong></label>
-        {{ currentTutorial.published ? "Published" : "Pending" }}
-      </div>
+</body>
 
-      <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
-        Edit
-      </a>
-    </div>
-
-    <div *ngIf="!currentTutorial">
-      <br />
-      <p>Please click on a Tutorial...</p>
-    </div>
-  </div>
-</div>
+</html>
