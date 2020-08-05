@@ -10,6 +10,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
 import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
+import { EcommerceComponent } from './ecommerce/ecommerce.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'ecommerce', component:EcommerceComponent},
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
