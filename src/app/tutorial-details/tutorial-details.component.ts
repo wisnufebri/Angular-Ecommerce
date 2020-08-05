@@ -69,6 +69,7 @@ export class TutorialDetailsComponent implements OnInit {
         response => {
           console.log(response);
           this.router.navigate(['/tutorials']);
+          this.message = 'List was deleted';
         },
         error => {
           console.log(error);

@@ -18,46 +18,22 @@
 </head>
 
 <body>
-
   <div class="jumbotron text-center" style="margin-bottom:0">
     <h1>My First Bootstrap 4 Page</h1>
     <p>Resize this responsive page to see the effect!</p>
   </div>
-
-  <div class="container" style="margin-top:30px">
-    <div class="row">
-      <div class="col-sm-4">
-
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/add">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/profile">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Add</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-        <hr class="d-sm-none">
-      </div>
-      <div>
+     <div class ="container">
         <div class="row">
-          <h4 class="list-group-item" *ngFor="let ecommerce of ecommerces; let i = index"
-            [class.active]="i == currentIndex" (click)="setActiveEcommerce(ecommerce, i)">
+          <h4 class="list-group-item" *ngFor="let display of displays; let i = index"
+            [class.active]="i == currentIndex" (click)="setActiveDisplay(display, i)">
             <a>
-              <p>{{ ecommerce.nama }}</p>
-              <span class="badge">Rp. {{ ecommerce.harga }},-</span>
+              <p>{{ display.nama }}</p>
+              <p>{{ display.description }}</p>
+              <span class="badge">Rp. {{ display.harga }},-</span>
             </a>
           </h4>
         </div>
       </div>
-    </div>
-  </div>
-
   <div class="jumbotron text-center" style="margin-bottom:0">
     <p>Footer</p>
   </div>

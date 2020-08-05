@@ -11,6 +11,7 @@ export class EcommerceComponent implements OnInit {
   currentEcommerce = null;
   currentIndex = -1;
   nama = '';
+  harga = '';
 
   constructor(private ecommerceService: EcommerceService) { }
 

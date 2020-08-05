@@ -11,6 +11,7 @@ import { TutorialsListComponent } from './tutorials-list/tutorials-list.componen
 import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
 import { EcommerceComponent } from './ecommerce/ecommerce.component';
+import { DisplayComponent } from './display/display.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'add', component: AddTutorialComponent },
+  { path: 'display', component: DisplayComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

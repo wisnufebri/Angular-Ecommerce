@@ -19,6 +19,7 @@ import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
 import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
 import { EcommerceComponent } from './ecommerce/ecommerce.component';
+import { DisplayComponent } from './display/display.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EcommerceComponent } from './ecommerce/ecommerce.component';
     TutorialDetailsComponent,
     TutorialsListComponent,
     EcommerceComponent,
+    DisplayComponent,
     
   ],
   imports: [
