@@ -57,6 +57,7 @@ export class TutorialDetailsComponent implements OnInit {
         response => {
           console.log(response);
           this.message = 'The tutorial was updated successfully!';
+          this.router.navigate(['item']);
         },
         error => {
           console.log(error);
@@ -68,7 +69,7 @@ export class TutorialDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/tutorials']);
+          this.router.navigate(['tutorials']);
           this.message = 'List was deleted';
         },
         error => {

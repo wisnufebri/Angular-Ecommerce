@@ -351,9 +351,8 @@
 </style>
 <nav class="navbar navbar-expand navbar-dark bg-dark">
   <a class="" href="#"><i class="fa fa-drivers-license"></i> WisnuFebri</a>
-  <a routerLink="display"><i class="fa fa-home"></i> Home</a>
-  <a routerLink="tutorials" *ngIf="isLoggedIn" class="nav-link"><i class="fa fa-calendar"></i> Tutorials</a>
-  <a routerLink="ecommerce" *ngIf="isLoggedIn" class="nav-link"><i class="fa fa-cart-arrow-down"> MyChart</i></a>
+  <a routerLink="home"><i class="fa fa-home"></i> Home</a>
+  <a routerLink="item" *ngIf="isLoggedIn" class="nav-link"><i class="fa fa-calendar"></i> Item</a>
   <ul class="navbar-nav mr-auto" routerLinkActive="active">
     <li class="nav-item" *ngIf="showAdminBoard">
       <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>

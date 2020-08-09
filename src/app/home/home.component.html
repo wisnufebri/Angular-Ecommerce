@@ -1,46 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-
-  <div class="jumbotron text-center">
-    <h1>Bismillah...</h1>
-  </div>
 
   <div class="container">
+    <h1>Hello Word</h1>
+  </div>
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-4">
-        <header>
-          <p>{{ content }}</p>
-          <iframe width="300" height="300" src="https://youtube.com/embed/_pbVvZnW0og">
-          </iframe>
-        </header>
+      <!-- baris 1 -->
+      <div class="col-sm-4" style="background-color:lavender;">
+        <div class="content" style="background-color:lavender;">
+          <h4>Item List</h4>
+          <input type="text" class="form-control" placeholder="Search by nama" [(ngModel)]="nama" />
+          <div class="container2">
+            <i class="center">
+              <button class="m-3 btn btn-info" (click)="itemHome()">
+                <i class="fa fa-search"> Search</i>
+              </button>
+              <button routerLink="/add" class="m-3 btn btn-success">
+                <i class="fa fa-plus-square"> Add Item</i>
+              </button>
+            </i>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-4">       
-        <header>
-          <p>{{ content }}</p>
-          <iframe width="300" height="300" src="https://youtube.com/embed/uuMbGeWGau4">
-          </iframe>
-        </header>
+
+      <!-- baris 2 -->
+      <div class="col-sm-4" style="background-color:lavenderblush;">
+        <h4>Item List</h4>
+        <p>Please click on a Item...</p>
+        <ul class="list-group">
+          <li 
+          class="list-group-item" 
+          *ngFor="let home of homes | paginate : {
+                 itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          " [class.active]="i == currentIndex" 
+          (click)="setActiveHome(home, i)">
+            {{ home.nama }}
+          </li>
+        </ul>
+        <div class="container">
+          <div class="row">
+            <div class="fixed"><select (change)="handlePageSizeChange($event)">
+                <option *ngFor="let size of pageSizes" [ngValue]="size">
+                  {{ size }}
+                </option>
+              </select>
+            </div>
+            <div class="fixed">
+              <ul>
+                <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                  (pageChange)="handlePageChange($event)">
+                </pagination-controls>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-4">
-        <header>
-          <p>{{ content }}</p>
-          <iframe width="300" height="300" src="https://youtube.com/embed/1GJMNOYL6c8">
-          </iframe>
-        </header>
+
+      <!-- baris 3 -->
+      <div class="col-sm-4" style="background-color:lavender;">
+        <div *ngIf="currentHome">
+          <h4>Item</h4>
+          <div>
+            <label><strong>Title:</strong>
+            </label> {{ currentHome.nama }}
+          </div>
+          <div>
+            <label><strong>Description:</strong></label>
+            {{ currentHome.description }}
+          </div>
+          <div>
+
+          <a class="btn btn-warning" routerLink="/homes/{{ currentHome.id }}">
+            <i class="fa fa-pencil"></i> Edit
+          </a>
+        </div>
       </div>
     </div>
   </div>
-
-</body>
-</html>
+  </div>

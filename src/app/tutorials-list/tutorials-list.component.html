@@ -1,110 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    form {
-      border: 10px solid #ffffff;
-      width: max-content;
-      orientation: landscape;
-      margin-left: 410px;
-    }
-
-    input[type=text],
-    input[type=password],
-    input[type=email] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-flexbox;
-      border: 1px solid #ccc;
-      box-sizing: inherit;
-
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 30%;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-
-    .imgcontainer {
-      text-align: center;
-      margin: 24px 0 12px 0;
-    }
-
-    img.avatar {
-      width: 20%;
-      border-radius: 50%;
-      margin-left: 450px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-
-    .container {
-      padding: 10px;
-    }
-
-    span.psw {
-      float: right;
-      padding-top: 16px;
-    }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
+<style>
+  .container {
+    position: relative;
+  }
+
+  .center {
+    position: absolute;
+    top: 30%;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .fixed {
+    bottom: 0;
+    right: -25px;
+    height: max-content;
+    width: max-content;
+  }
+
+  .fixed2 {
+    bottom: 0;
+    right: 0;
+    width: 300px;
+  }
+
+  .container2 {
+    position: sticky;
+
+  }
+</style>
 
 <body>
-  <div class="jumbotron text-center">
-    <h1>Tutorial Page</h1>
+  <div class="w3-container w3-teal">
+    <h1>Hello Word</h1>
   </div>
-
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-
-      <!-- search -->
-      <div class="col-sm-4">
-        <h4>Search by Title</h4>
-        <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="title" />
-          <button class="btn btn-primary btn-block" type="button" (click)="searchTitle()">
-            <i class="fa fa-search"></i> Search
-          </button>
-          <button routerLink="/add" class="btn btn-primary btn-block">
-            <i class="fa fa-plus-square"></i> Add
-          </button>
+      <!-- baris 1 -->
+      <div class="col-sm-4" style="background-color:lavender;">
+        <div class="content" style="background-color:lavender;">
+          <h4>Item List</h4>
+          <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="title" />
+          <div class="container2">
+            <i class="center">
+              <button class="m-3 btn btn-info" (click)="retrieveTutorials()">
+                <i class="fa fa-search"> Search</i>
+              </button>
+              <button routerLink="/add" class="m-3 btn btn-success">
+                <i class="fa fa-plus-square"> Add Item</i>
+              </button>
+              <button class="m-3 btn btn-danger" (click)="removeAllTutorials()">
+                <i class="fa fa-trash"> Remove</i>
+              </button>
+            </i>
+          </div>
         </div>
-
-      <div class="col-sm-4">
-        <h4>Please click on a list !!!</h4>
-        <strong class="list-group">
-          <li class="list-group-item" *ngFor="let tutorial of tutorials; let i = index"
-            [class.active]="i == currentIndex" (click)="setActiveTutorial(tutorial, i)">
-            {{ tutorial.title }}
-          </li>
-        </strong>
       </div>
 
-      <div class="col-sm-4">
+      <!-- baris 2 -->
+      <div class="col-sm-4" style="background-color:lavenderblush;">
+        <h4>Item List</h4>
+        <p>Please click on a Item...</p>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let tutorial of tutorials | paginate : {
+                 itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          " [class.active]="i == currentIndex" (click)="setActiveTutorial(tutorial, i)">
+            {{ tutorial.title }}
+          </li>
+        </ul>
+        <div class="container">
+          <div class="row">
+            <div class="fixed"><select (change)="handlePageSizeChange($event)">
+                <option *ngFor="let size of pageSizes" [ngValue]="size">
+                  {{ size }}
+                </option>
+              </select>
+            </div>
+            <div class="fixed">
+              <ul>
+                <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                  (pageChange)="handlePageChange($event)">
+                </pagination-controls>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- baris 3 -->
+      <div class="col-sm-4" style="background-color:lavender;">
         <div *ngIf="currentTutorial">
-          <h4>Tutorial</h4>
+          <h4>Item</h4>
           <div>
-            <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+            <label><strong>Title:</strong>
+            </label> {{ currentTutorial.title }}
           </div>
           <div>
             <label><strong>Description:</strong></label>
@@ -115,17 +122,13 @@
             {{ currentTutorial.published ? "Published" : "Pending" }}
           </div>
 
-          <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
-            Edit
+          <a class="btn btn-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
+            <i class="fa fa-pencil"></i> Edit
           </a>
         </div>
-        <div *ngIf="!currentTutorial">
-          <br />
-        </div>
       </div>
+
     </div>
   </div>
-
 </body>
-
 </html>

@@ -11,8 +11,8 @@ export class TutorialService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getAll(params): Observable<any> {
+    return this.http.get(baseUrl, { params });
   }
 
   get(id): Observable<any> {
@@ -32,10 +32,10 @@ export class TutorialService {
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
+    return this.http.delete(`${baseUrl}/tutorials`);
   }
 
   findByTitle(title): Observable<any> {
-    return this.http.get(`${baseUrl}?title=${title}`);
+    return this.http.get(`${baseUrl}/title=${title}`);
   }
 }

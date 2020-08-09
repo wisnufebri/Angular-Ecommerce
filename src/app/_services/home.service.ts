@@ -7,15 +7,15 @@ const baseUrl = 'http://localhost:8080/item';
 @Injectable({
   providedIn: 'root'
 })
-export class DisplayService {
+export class HomeService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getAll(params): Observable<any> {
+    return this.http.get(baseUrl, { params });
   }
 
-  getId(id): Observable<any> {
+  get(id): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
@@ -24,6 +24,11 @@ export class DisplayService {
   }
 
   update(id, data): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+    return this.http.put(`${baseUrl}/update${id}`, data);
+  }
+
+  delete(id): Observable<any> {
+    return this.http.delete(`${baseUrl}/${id}`);
   }
 }
+

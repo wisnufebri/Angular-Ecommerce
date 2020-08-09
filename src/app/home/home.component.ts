@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { HomeService } from '../_services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -7,19 +7,70 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  content: string;
 
+  homes: any;
+  currentHome = null;
+  currentIndex = -1;
+  nama = '';
 
-  constructor(private userService: UserService) { }
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 6, 9];
 
-  ngOnInit() {
-    this.userService.getPublicContent().subscribe(
-      data => {
-        this.content = data;
-      },
+  constructor(private homeService: HomeService ) { }
+
+  ngOnInit(): void {
+    this.itemHome();
+  }
+
+  getRequestParams(searchNama, page, pageSize) {
+    let params = {};
+
+    if (searchNama) {
+      params[`nama`] = searchNama;
+    }
+
+    if (page) {
+      params[`page`] = page -1;
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    return params;
+  }
+
+  itemHome(){
+    const params = this.getRequestParams
+    (this.nama, this.page, this.pageSize);
+
+    this.homeService.getAll(params)
+    .subscribe(
+      body => {
+        const { homes, totalItems } = body;
+        this.homes = homes;
+        this.count = totalItems;
+        console.log(body);
+      }, 
       err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
+        console.log(err);
+      });
+  }
+
+  handlePageChange(event){
+    this.page = event;
+    this.itemHome();
+  }
+
+  handlePageSizeChange(event){
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.itemHome();
+  }
+
+  setActiveHome(home, index){
+    this.currentHome = home;
+    this.currentIndex = index;
   }
 }

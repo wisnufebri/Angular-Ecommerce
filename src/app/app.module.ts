@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,8 +18,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
 import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
-import { EcommerceComponent } from './ecommerce/ecommerce.component';
-import { DisplayComponent } from './display/display.component';
+
 
 @NgModule({
   declarations: [
@@ -34,11 +33,10 @@ import { DisplayComponent } from './display/display.component';
     AddTutorialComponent,
     TutorialDetailsComponent,
     TutorialsListComponent,
-    EcommerceComponent,
-    DisplayComponent,
     
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

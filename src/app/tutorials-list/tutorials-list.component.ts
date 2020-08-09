@@ -13,36 +13,70 @@ export class TutorialsListComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 6, 9];
+
   constructor(private tutorialService: TutorialService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.retrieveTutorials();
   }
 
-  retrieveTutorials(): void {
-    this.tutorialService.getAll()
+  getRequestParams(searchTitle, page, pageSize) {
+    // tslint:disable-next-line:prefer-const
+    let params = {};
+
+    if (searchTitle) {
+      params[`title`] = searchTitle;
+    }
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+
+    return params;
+  }
+
+  retrieveTutorials() {
+    const params = this.getRequestParams
+    (this.title, this.page, this.pageSize);
+
+    this.tutorialService.getAll(params)
       .subscribe(
-        data => {
-          this.tutorials = data;
-          console.log(data);
+        response => {
+          const { tutorials, totalItems } = response;
+          this.tutorials = tutorials;
+          this.count = totalItems;
+          console.log(response);
         },
         error => {
           console.log(error);
         });
   }
 
-  refreshList(): void {
+  handlePageChange(event) {
+    this.page = event;
     this.retrieveTutorials();
-    this.currentTutorial = null;
-    this.currentIndex = -1;
   }
 
-  setActiveTutorial(tutorial, index): void {
+  handlePageSizeChange(event) {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.retrieveTutorials();
+  }
+
+  setActiveTutorial(tutorial, index) {
     this.currentTutorial = tutorial;
     this.currentIndex = index;
   }
 
-  removeAllTutorials(): void {
+  removeAllTutorials() {
     this.tutorialService.deleteAll()
       .subscribe(
         response => {
@@ -54,15 +88,4 @@ export class TutorialsListComponent implements OnInit {
         });
   }
 
-  searchTitle(): void {
-    this.tutorialService.findByTitle(this.title)
-      .subscribe(
-        data => {
-          this.tutorials = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-  }
 }
