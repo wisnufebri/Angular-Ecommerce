@@ -10,6 +10,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
 import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
+import { ItemComponent } from './item/item.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
+  { path: 'list', component: ItemComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'item', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },

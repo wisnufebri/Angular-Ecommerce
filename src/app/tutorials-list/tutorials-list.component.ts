@@ -8,7 +8,7 @@ import { TutorialService } from '../_services/tutorial.service';
 })
 export class TutorialsListComponent implements OnInit {
 
-  tutorials: any;
+  tutorials: [];
   currentTutorial = null;
   currentIndex = -1;
   title = '';
@@ -45,7 +45,7 @@ export class TutorialsListComponent implements OnInit {
 
   retrieveTutorials() {
     const params = this.getRequestParams
-    (this.title, this.page, this.pageSize);
+      (this.title, this.page, this.pageSize);
 
     this.tutorialService.getAll(params)
       .subscribe(

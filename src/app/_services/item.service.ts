@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const baseUrl = 'http://localhost:8080/item';
+const baseUrl = 'http://localhost:8080/api/list';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class ItemService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class HomeService {
   }
 
   get(id): Observable<any> {
-    return this.http.get(`${baseUrl}/getItemById/${id}`);
+    return this.http.get(`${baseUrl}/item/${id}`);
   }
 
   create(data): Observable<any> {
@@ -35,8 +35,7 @@ export class HomeService {
     return this.http.delete(`${baseUrl}/item`);
   }
 
-  findByTitle(nama): Observable<any> {
+  findByNama(nama): Observable<any> {
     return this.http.get(`${baseUrl}/nama=${nama}`);
   }
 }
-

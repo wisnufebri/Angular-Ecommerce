@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HomeService } from '../_services/home.service';
 
 @Component({
@@ -8,69 +9,31 @@ import { HomeService } from '../_services/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  homes: any;
-  currentHome = null;
-  currentIndex = -1;
-  nama = '';
-
-  page = 1;
-  count = 0;
-  pageSize = 3;
-  pageSizes = [3, 6, 9];
-
-  constructor(private homeService: HomeService ) { }
+  homes = []
+  constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit(): void {
-    this.itemHome();
+    this.retrieveHome();
   }
 
-  getRequestParams(searchNama, page, pageSize) {
-    let params = {};
 
-    if (searchNama) {
-      params[`nama`] = searchNama;
-    }
+  retrieveHome() {
 
-    if (page) {
-      params[`page`] = page -1;
-    }
-
-    if (pageSize) {
-      params[`size`] = pageSize;
-    }
-    return params;
+    this.homeService.getAll().subscribe(
+      response => this.homes = response,
+      error => console.log(error)
+    )
   }
 
-  itemHome(){
-    const params = this.getRequestParams
-    (this.nama, this.page, this.pageSize);
-
-    this.homeService.getAll(params)
-    .subscribe(
-      body => {
-        const { homes, totalItems } = body;
-        this.homes = homes;
-        this.count = totalItems;
-        console.log(body);
-      }, 
-      err => {
-        console.log(err);
-      });
-  }
-
-  handlePageChange(event){
-    this.page = event;
-    this.itemHome();
-  }
-
-  handlePageSizeChange(event){
-    this.pageSize = event.target.value;
-    this.page = 1;
-    this.itemHome();
-  }
-
-  setActiveHome(home, index){
-    this.currentHome = home;
-    this.currentIndex = index;
+  removeAllHome() {
+    this.homeService.deleteAll()
+      .subscribe(
+        response => {
+          console.log(response);
+          this.retrieveHome();
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

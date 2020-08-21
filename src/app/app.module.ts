@@ -18,6 +18,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddTutorialComponent } from './add-tutorial/add-tutorial.component';
 import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 import { TutorialsListComponent } from './tutorials-list/tutorials-list.component';
+import { ItemComponent } from './item/item.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { TutorialsListComponent } from './tutorials-list/tutorials-list.componen
     AddTutorialComponent,
     TutorialDetailsComponent,
     TutorialsListComponent,
+    ItemComponent,
     
   ],
   imports: [

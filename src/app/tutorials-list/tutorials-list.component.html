@@ -5,130 +5,100 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<style>
-  .container {
-    position: relative;
-  }
-
-  .center {
-    position: absolute;
-    top: 30%;
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-    font-size: 18px;
-  }
-
-  .fixed {
-    bottom: 0;
-    right: -25px;
-    height: max-content;
-    width: max-content;
-  }
-
-  .fixed2 {
-    bottom: 0;
-    right: 0;
-    width: 300px;
-  }
-
-  .container2 {
-    position: sticky;
-
-  }
-</style>
 
 <body>
-  <div class="w3-container w3-teal">
-    <h1>Hello Word</h1>
-  </div>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <!-- baris 1 -->
-      <div class="col-sm-4" style="background-color:lavender;">
-        <div class="content" style="background-color:lavender;">
-          <h4>Item List</h4>
-          <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="title" />
-          <div class="container2">
-            <i class="center">
-              <button class="m-3 btn btn-info" (click)="retrieveTutorials()">
-                <i class="fa fa-search"> Search</i>
-              </button>
-              <button routerLink="/add" class="m-3 btn btn-success">
-                <i class="fa fa-plus-square"> Add Item</i>
-              </button>
-              <button class="m-3 btn btn-danger" (click)="removeAllTutorials()">
-                <i class="fa fa-trash"> Remove</i>
-              </button>
-            </i>
-          </div>
+      <div class="container" style="background-color:lavender;">
+        <br>
+        <input type="text" class="m-3 form-control" placeholder="Search by title" [(ngModel)]="title" />
+        <div class="container2">
+          <i class="center">
+            <button class="m-3 btn btn-info" (click)="retrieveTutorials()">
+              <i class="fa fa-search"> Search</i>
+            </button>
+            <button routerLink="/add" class="m-3 btn btn-success">
+              <i class="fa fa-plus-square"> Add Item</i>
+            </button>
+            <button class="m-3 btn btn-danger" (click)="removeAllTutorials()">
+              <i class="fa fa-trash"> Remove</i>
+            </button>
+          </i>
         </div>
       </div>
 
       <!-- baris 2 -->
-      <div class="col-sm-4" style="background-color:lavenderblush;">
-        <h4>Item List</h4>
-        <p>Please click on a Item...</p>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let tutorial of tutorials | paginate : {
+      <div class="container" style="background-color:lavenderblush;">
+        <div class="container row mt-5 align-items-center">
+          <div class="m-3 card text-white bg-dark mb-3" *ngFor="let tutorial of tutorials | paginate : {
                  itemsPerPage: pageSize,
                     currentPage: page,
                     totalItems: count
                   };
             let i = index
           " [class.active]="i == currentIndex" (click)="setActiveTutorial(tutorial, i)">
-            {{ tutorial.title }}
-          </li>
-        </ul>
-        <div class="container">
-          <div class="row">
-            <div class="fixed"><select (change)="handlePageSizeChange($event)">
-                <option *ngFor="let size of pageSizes" [ngValue]="size">
-                  {{ size }}
-                </option>
-              </select>
-            </div>
-            <div class="fixed">
-              <ul>
-                <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
-                  (pageChange)="handlePageChange($event)">
-                </pagination-controls>
-              </ul>
+            <div class="m-3 card-body">
+              <h5 class="card-title">{{ tutorial.title }}</h5>
+
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Detail</button>
             </div>
           </div>
         </div>
+
+        <div class="container m-3">
+          <div class="row mt-2"><select (change)="handlePageSizeChange($event)">
+              <option class="card-columns" *ngFor="let size of pageSizes" [ngValue]="size">
+                {{ size }}
+              </option>
+            </select>
+            <pagination-controls class="card-columns" previousLabel="Prev" nextLabel="Next" responsive="true"
+              (pageChange)="handlePageChange($event)">
+            </pagination-controls>
+          </div>
+        </div>
+        <br>
       </div>
+    </div>
+  </div>
 
-      <!-- baris 3 -->
-      <div class="col-sm-4" style="background-color:lavender;">
-        <div *ngIf="currentTutorial">
-          <h4>Item</h4>
-          <div>
-            <label><strong>Title:</strong>
-            </label> {{ currentTutorial.title }}
-          </div>
-          <div>
-            <label><strong>Description:</strong></label>
-            {{ currentTutorial.description }}
-          </div>
-          <div>
-            <label><strong>Status:</strong></label>
-            {{ currentTutorial.published ? "Published" : "Pending" }}
-          </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog" *ngIf="currentTutorial">
+      <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p><label><strong>Title:</strong>
+            </label> {{ currentTutorial.title }}</p>
+
+          <p><label><strong>Description:</strong></label>
+            {{ currentTutorial.description }}</p>
+
+          <p><label><strong>Status:</strong></label>
+            {{ currentTutorial.published ? "Published" : "Pending" }}</p>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
           <a class="btn btn-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
             <i class="fa fa-pencil"></i> Edit
           </a>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
+
 </body>
+
 </html>

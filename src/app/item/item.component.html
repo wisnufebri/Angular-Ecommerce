@@ -17,16 +17,15 @@
   <br>
   <br>
   <hr>
+
   <div class="w3-display-container w3-content w3-wide">
-  </div>
-  <div class="w3-display-container w3-content w3-wide">
-    <div class="col-md-4 mb-4" *ngFor="let home of homes">
+    <div class="col-md-4 mb-4" *ngFor="let item of items">
       <div class="card text-white bg-dark mb-4" style="max-width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title"><span class="label label-danger">{{home.nama}}</span></h5>
+          <h5 class="card-title"><span class="label label-danger">{{item.nama}}</span></h5>
           <hr>
-          <p class="card-text">Rp. {{home.stock}}</p>
-          <p class="card-text">{{home.harga}}</p>
+          <p class="card-text">Rp. {{item.berat}}</p>
+          <p class="card-text">{{item.description}}</p>
         </div>
         <br>
       </div>
